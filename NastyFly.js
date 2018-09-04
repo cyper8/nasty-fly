@@ -1,7 +1,7 @@
 import { LitElement, html } from "./node_modules/@polymer/lit-element/lit-element.js";
 
-const БАЗОВИЙ_ЗСУВ = 40;
-const БАЗОВИЙ_ПОРІГ = 75;
+const БАЗОВИЙ_КРОК = 50;
+const БАЗОВИЙ_ПОРІГ = 95;
 
 export
 class НабридливаМуха extends LitElement {
@@ -21,25 +21,35 @@ class НабридливаМуха extends LitElement {
   _зліт() {
     this.стан = 'літає';
     this.shadowRoot.querySelector('audio#дзижчання').play();
-    return Promise.resolve();
+    return new Promise(resolve =>
+      this.__затримка_зльоту = setTimeout(
+        resolve,
+        /* не менше, мс */100+(Math.random()*80)/* плюс не більше, мс*/
+      )
+    );
   }
 
   __рухатисяДо(точка) {
     const муха = this.shadowRoot.querySelector('div.муха');
     let [x, y] = [муха.offsetLeft, муха.offsetTop];
     let [X, Y] = точка;
-    this.кут = Math.atan((Y - y) / (X - x)) + (X >= x ? 1 : -1) * Math.PI / 2;
-    this.x = X;
-    this.y = Y;
+    let новий_напрям = Math.atan((Y - y) / (X - x)) + (X >= x ? 1 : -1) * Math.PI / 2;
+    window.requestAnimationFrame(
+      () => {
+        this.кут = новий_напрям;
+        this.x = X;
+        this.y = Y;
+      }
+    );
     return точка;
   }
 
-  _рухУВипадковомуНапряміНаВипадковуВідстань() {
+  get __випадковеМісцеПопереду() {
     const f = ["sin", "cos"];
     const випадковий_коефіцієнт_напряму = Math.random(); // що швидше рухається, то менше відхилення вбік
     const випадковий_коефіцієнт_швидкості = 1 - випадковий_коефіцієнт_напряму;
 
-    function поправкаНаближення(положення, напрям, поріг) {
+    function поправкаНаближенняДоКраю(положення, напрям, поріг) {
       const розміри_поля = [window.innerWidth, window.innerHeight];
 
       if (положення < поріг) {
@@ -52,36 +62,35 @@ class НабридливаМуха extends LitElement {
     }
 
     let кут = this.кут;
-    this.кут = кут = кут + випадковий_коефіцієнт_напряму * (Math.random() * Math.PI / 4 - Math.PI / 8);
-    let нове_положення = [this.x, this.y].map(function (координата, напрям) {
+    кут += випадковий_коефіцієнт_напряму * (Math.random() * Math.PI / 4 - Math.PI / 8);
+    return [this.x, this.y].map(function (координата, напрям) { // напрям: горизонтальний - 0, вертикальний - 1
       let зсув = (
-        БАЗОВИЙ_ЗСУВ / 2 + Math.random() * БАЗОВИЙ_ЗСУВ * випадковий_коефіцієнт_швидкості
+        БАЗОВИЙ_КРОК / 2 + Math.random() * БАЗОВИЙ_КРОК * випадковий_коефіцієнт_швидкості
       ) * (
-        (напрям ? -1 : 1) * Math[f[напрям]](кут) + поправкаНаближення(координата, напрям, БАЗОВИЙ_ПОРІГ)
+        (напрям ? -1 : 1) * Math[f[напрям]](кут) + поправкаНаближенняДоКраю(координата, напрям, БАЗОВИЙ_ПОРІГ)
       );
       return координата + зсув;
     });
-    return this.__рухатисяДо(нове_положення);
   }
 
   літатиПротягом(час) {
     const кінець = Date.now() + Math.round(час * 1000);
     const муха = this;
-    var секундомір;
-    return function(){
-      return new Promise(function(resolve,reject){
-        function Рух() {
+    var кроки;
+    return муха._зліт()
+    .then(
+      () => new Promise(function(resolve,reject){
+        кроки = setInterval(function(){
           if ((Date.now() < кінець) && (муха.стан == "літає")) {
-            муха._рухУВипадковомуНапряміНаВипадковуВідстань();
-            секундомір = window.requestAnimationFrame(Рух);
+            муха.__рухатисяДо(муха.__випадковеМісцеПопереду);
           } else {
-            window.cancelAnimationFrame(секундомір);
+            clearInterval(кроки);
+            if (муха.стан == "літає") муха._сісти();
             resolve();
           }
-        }
-        Рух();
-      });
-    }
+        },10)
+      })
+    )
   }
 
   _сісти() {
@@ -102,11 +111,8 @@ class НабридливаМуха extends LitElement {
     this.y = 50;
     this.addEventListener('click',function(e){
       let муха = e.target;
-
       if (муха.стан == "сидить") {
-        муха._зліт()
-        .then(муха.літатиПротягом(Math.random() * 10))
-        .then(муха._сісти.bind(муха));
+        муха.літатиПротягом(/* від */1+Math.random() * /* до приблизно +*/5/* секунд */);
       } else if (муха.стан == "літає") {
         муха._вмерти();
       }

@@ -4,21 +4,19 @@
   "description": "cache a nasty fly",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "serve": "polyserve",
+    "webpack": "webpack --config webpack.conf.js",
+    "start": "npm run-script webpack && npm run-script serve"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@polymer/lit-element": "^0.5.2"
+    "@polymer/lit-element": "^0.5.2",
+    "@webcomponents/webcomponentsjs": "^2.0.0-beta.3"
   },
   "devDependencies": {
     "polyserve": "^0.27.12",
-    "webpack": "^4.16.5",
+    "webpack": "^4.17.2",
     "webpack-cli": "^3.1.0"
-  },
-  "scripts":{
-    "serve": "polyserve",
-    "webpack": "webpack --config webpack.conf.js",
-    "start": "npm run-script webpack && npm run-script serve"
   }
 }
