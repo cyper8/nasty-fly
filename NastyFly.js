@@ -1,4 +1,4 @@
-import { LitElement, html, property } from "@polymer/lit-element";
+import { LitElement, html } from "@polymer/lit-element";
 
 const БАЗОВИЙ_КРОК = 50;
 const БАЗОВИЙ_ПОРІГ = 95;
@@ -101,7 +101,7 @@ class НабридливаМуха extends LitElement {
   _вмерти() {
     this.стан = 'прибита';
     this.shadowRoot.querySelector('audio#дзижчання').pause();
-    this.dispatchEvent(new CustomEvent("die",{bubbles: true, composed: true}));
+    this.dispatchEvent(new CustomEvent("смерть",{bubbles: true, composed: true}));
   }
 
   constructor() {
