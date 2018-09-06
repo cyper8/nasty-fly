@@ -30,15 +30,16 @@ class НабридливаМуха extends LitElement {
   }
 
   __рухатисяДо(точка) {
-    const муха = this.shadowRoot.querySelector('div.муха');
+    let муха = this.shadowRoot.querySelector('div.муха');
     let [x, y] = [муха.offsetLeft, муха.offsetTop];
     let [X, Y] = точка;
     let новий_напрям = Math.atan((Y - y) / (X - x)) + (X >= x ? 1 : -1) * Math.PI / 2;
+    муха = this;
     window.requestAnimationFrame(
       () => {
-        this.кут = новий_напрям;
-        this.x = X;
-        this.y = Y;
+        муха.кут = новий_напрям;
+        муха.x = X;
+        муха.y = Y;
       }
     );
     return точка;
