@@ -2,7 +2,7 @@
 module.exports = {
     entry : './index.js',
     output : {
-        filename : 'index.js',
+        filename : 'index.js'
     },
-    //mode : 'development'
+    mode : 'development'
 };

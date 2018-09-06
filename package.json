@@ -4,17 +4,19 @@
   "description": "cache a nasty fly",
   "main": "index.js",
   "scripts": {
-    "serve": "polyserve",
+    "serve": "echo ${C9_HOSTNAME:-localhost}:${C9_PORT:-3000}; polyserve -H ${C9_IP:-127.0.0.1} -p ${C9_PORT:-3000}",
     "webpack": "webpack --config webpack.conf.js",
     "start": "npm run-script webpack && npm run-script serve"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@polymer/lit-element": "^0.5.2",
-    "@webcomponents/webcomponentsjs": "^2.0.0-beta.3"
+    "@polymer/lit-element": "dev",
+    "@webcomponents/webcomponentsjs": "^2.1"
   },
   "devDependencies": {
+    "babel-preset-minify": "^0.4.3",
+    "babel-webpack-plugin": "^0.1.1",
     "polyserve": "^0.27.12",
     "webpack": "^4.17.2",
     "webpack-cli": "^3.1.0"

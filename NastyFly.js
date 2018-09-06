@@ -1,4 +1,4 @@
-import { LitElement, html } from "./node_modules/@polymer/lit-element/lit-element.js";
+import { LitElement, html, property } from "@polymer/lit-element";
 
 const БАЗОВИЙ_КРОК = 50;
 const БАЗОВИЙ_ПОРІГ = 95;
@@ -101,14 +101,15 @@ class НабридливаМуха extends LitElement {
   _вмерти() {
     this.стан = 'прибита';
     this.shadowRoot.querySelector('audio#дзижчання').pause();
+    this.dispatchEvent(new CustomEvent("die",{bubbles: true, composed: true}));
   }
 
   constructor() {
     super();
     this.стан = 'сидить';
-    this.кут = 0;
-    this.x = 50;
-    this.y = 50;
+    this.кут = Math.random()*(Math.PI*2);
+    this.x = Math.round(Math.random()*window.innerWidth);
+    this.y = Math.round(Math.random()*window.innerWidth);
     this.addEventListener('click',function(e){
       let муха = e.target;
       if (муха.стан == "сидить") {
@@ -119,12 +120,7 @@ class НабридливаМуха extends LitElement {
     });
   }
 
-  _render({
-    стан,
-    x,
-    y,
-    кут
-  }) {
+  render() {
     return html`
       <style>
         .муха {
@@ -139,15 +135,14 @@ class НабридливаМуха extends LitElement {
           background-repeat: no-repeat;
           background-size: cover;
           background-image: url('./fly.svg');
-          left: ${x}px;
-          top: ${y}px;
-          transform: rotateZ(${кут}rad) translate(-50%,-50%) scale(1);
-          transform-origin: center;
+          left: ${this.x}px;
+          top: ${this.y}px;
+          transform-origin: 0px 0px;
+          transform: rotateZ(${this.кут}rad) translate(-50%,-50%) scale(1);
         }
 
         .муха[is="літає"] {
           background-image: url('./fly-flies.svg');
-          /* transform: rotateZ(${кут}rad) translate(-50%,-50%) scale(1.3); */
         }
 
         .муха[is="прибита"] {
@@ -155,7 +150,7 @@ class НабридливаМуха extends LitElement {
           background-color: pink;
         }
       </style>
-      <div class="муха" is$=${стан}></div>
+      <div class="муха" is=${this.стан}></div>
       <audio id="дзижчання" preload="auto" loop>
         <source src="buzz.mp3" type="audio/mp3">
       </audio>
