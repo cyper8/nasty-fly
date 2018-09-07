@@ -1,10 +1,12 @@
 //webpack.conf.js
+const path = require("path");
 const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
     entry : './index.js',
     output : {
-        filename : 'index.js'
+        filename : 'index.js',
+        path: path.resolve(__dirname, 'docs')
     },
     optimization:{
         minimize: false
