@@ -8,9 +8,9 @@ module.exports = {
         filename : 'index.js',
         path: path.resolve(__dirname, 'docs')
     },
-    optimization:{
-        minimize: false
-    },
+    // optimization:{
+    //     minimize: false
+    // },
     plugins: [
         new CopyPlugin([
             './index.html',

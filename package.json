@@ -6,7 +6,7 @@
   "scripts": {
     "serve": "echo ${C9_HOSTNAME:-localhost}:${C9_PORT:-3000}; polyserve -H ${C9_IP:-127.0.0.1} -p ${C9_PORT:-3000}",
     "webpack": "webpack --config webpack.conf.js",
-    "start": "npm run-script webpack && npm run-script serve --root dist"
+    "start": "npm run-script webpack && npm run-script serve --root docs"
   },
   "author": "",
   "license": "ISC",
