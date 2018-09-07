@@ -9,7 +9,7 @@ class ГраВМуху extends LitElement {
     return 'fly-game';
   }
   
-  async * мухи() {
+  async *мухи() {
     while (true){
       let нова_муха, смерть_мухи;
       

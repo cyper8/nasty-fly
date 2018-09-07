@@ -110,7 +110,7 @@ class НабридливаМуха extends LitElement {
     this.стан = 'сидить';
     this.кут = Math.random()*(Math.PI*2);
     this.x = Math.round(Math.random()*window.innerWidth);
-    this.y = Math.round(Math.random()*window.innerWidth);
+    this.y = Math.round(Math.random()*window.innerHeight);
     this.addEventListener('click',function(e){
       let муха = e.target;
       if (муха.стан == "сидить") {

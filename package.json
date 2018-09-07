@@ -6,7 +6,7 @@
   "scripts": {
     "serve": "echo ${C9_HOSTNAME:-localhost}:${C9_PORT:-3000}; polyserve -H ${C9_IP:-127.0.0.1} -p ${C9_PORT:-3000}",
     "webpack": "webpack --config webpack.conf.js",
-    "start": "npm run-script webpack && npm run-script serve"
+    "start": "npm run-script webpack && npm run-script serve --root dist"
   },
   "author": "",
   "license": "ISC",
@@ -15,9 +15,12 @@
     "@webcomponents/webcomponentsjs": "^2.1"
   },
   "devDependencies": {
+    "babel-minify-webpack-plugin": "^0.3.1",
     "babel-preset-minify": "^0.4.3",
     "babel-webpack-plugin": "^0.1.1",
+    "copy-webpack-plugin": "^4.5.2",
     "polyserve": "^0.27.12",
+    "uglifyjs-webpack-plugin": "^1.3.0",
     "webpack": "^4.17.2",
     "webpack-cli": "^3.1.0"
   }
