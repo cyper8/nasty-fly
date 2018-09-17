@@ -130,6 +130,7 @@ class НабридливаМуха extends LitElement {
           width: 50px;
           height: 50px;
           border-radius: 50%;
+          touch-action: manipulation;
           /* border: solid 1px; */
           overflow: visible;
           background-position: center;
