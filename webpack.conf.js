@@ -15,7 +15,12 @@ module.exports = {
         new CopyPlugin([
             './index.html',
             './*.mp3',
-            './*.svg'],{})
+            './*.svg',
+            './README.md',
+            { from: './node_modules/commonmark/dist/commonmark.min.js', to: 'node_modules/commonmark/dist/' },
+            { from: './node_modules/prismjs/prism.js', to: 'node_modules/prismjs/' },
+            { from: './node_modules/prismjs/themes/prism.css', to: 'node_modules/prismjs/themes/' } 
+        ],{})
     ],
     mode : 'production'
 };

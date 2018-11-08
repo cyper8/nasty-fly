@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@intcreator/markdown-element": "^0.3.3",
     "@polymer/lit-element": "dev",
     "@webcomponents/webcomponentsjs": "^2.1"
   },
