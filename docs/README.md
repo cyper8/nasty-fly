@@ -26,3 +26,7 @@ Err... Why would you need it, dude? Anyway:
     <nasty-fly></nasty-fly>
 </body>
 ```
+
+## What I Get
+
+Watch it alive [here](https://cyper8.github.io/nasty-fly/).

@@ -1,4 +1,4 @@
-import { LitElement, html } from "@polymer/lit-element";
+import { LitElement, html } from "lit-element";
 // import { asyncAppend } from 'lit-html/directives/async-append';
 
 import { НабридливаМуха } from './NastyFly.js';

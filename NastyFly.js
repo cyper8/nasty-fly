@@ -1,4 +1,4 @@
-import { LitElement, html } from "@polymer/lit-element";
+import { LitElement, html } from "lit-element";
 
 const БАЗОВИЙ_КРОК = 50;
 const БАЗОВИЙ_ПОРІГ = 95;
