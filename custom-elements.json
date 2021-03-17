@@ -1,0 +1,78 @@
+{
+  "version": 2,
+  "tags": [
+    {
+      "name": "nasty-fly-game",
+      "description": "Компонент генерує рухомих мух, які літають по сторінці, і які можна давити чому ведеться рахунок.",
+      "properties": [
+        {
+          "name": "counter",
+          "type": "number",
+          "description": "рахунок вбитих мух",
+          "default": "0"
+        },
+        {
+          "name": "maxcount",
+          "type": "number",
+          "description": "Максимальий рахунок вбитих мух. Далі мухи не створюються",
+          "default": "50"
+        },
+        {
+          "name": "мухи",
+          "type": "TemplateResult[]",
+          "description": "Масив із усіма створеними мухами",
+          "default": "[]"
+        }
+      ],
+      "events": [],
+      "slots": [],
+      "cssProperties": []
+    },
+    {
+      "name": "nasty-fly",
+      "description": "Компонент виглядає як муха. Якщо на неї клікнути вона злітає і літає по сторінці із дзижчанням. Якщо клікнути на ній ще раз вона помре.",
+      "properties": [
+        {
+          "name": "стан",
+          "type": "'сидить' | 'літає' | 'прибита'",
+          "description": "",
+          "default": "'сидить'"
+        },
+        {
+          "name": "liveliness",
+          "type": "number",
+          "description": "",
+          "default": "5"
+        }
+      ],
+      "events": [
+        {
+          "name": "readytofly",
+          "summary":"A fly is ready",
+          "description":"A fly is ready to respond to user interaction",
+          "type": "CustomEvent"
+        },
+        {
+          "name": "літає",
+          "summary":"Takeoff",
+          "description":"A fly starts to fly",
+          "type": "CustomEvent"
+        },
+        {
+          "name": "сидить",
+          "summary":"Seated",
+          "description":"A fly sits",
+          "type": "CustomEvent"
+        },
+        {
+          "name": "смерть",
+          "summary":"Dead",
+          "description":"A fly is smashed and dies",
+          "type": "CustomEvent"
+        }
+      ],
+      "slots": [],
+      "cssProperties": []
+    }
+  ]
+}

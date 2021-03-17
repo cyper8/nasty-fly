@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <style>
+    body {
+      background: #fafafa;
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+  <div id="demo"></div>
+
+  <script>
+
+  </script>
+
+  <script type="module">
+    import { html, render } from 'lit-html';
+    import { until } from 'lit-html/directives/until';
+    import { unsafeHTML } from 'lit-html/directives/unsafe-html'
+    import '../dist/nasty-fly-game.js';
+
+    const readme = fetch('../README.md')
+      .then(responce => responce.text())
+      // eslint-disable-next-line no-undef
+      .then(readmetext => html`${unsafeHTML(marked(readmetext))}`);
+
+    render(
+      html`
+        ${until(readme,html`loading readme...`)}
+        <nasty-fly-game maxcount=10></nasty-fly-game>
+      `,
+      document.querySelector('#demo')
+    );
+  </script>
+</body>
+</html>
