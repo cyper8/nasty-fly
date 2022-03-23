@@ -1,14 +1,19 @@
 {
-  "name": "nasty-fly-game",
-  "version": "0.1.0",
-  "description": "Webcomponent nasty-fly-game following open-wc recommendations",
-  "author": "nasty-fly",
+  "name": "nasty-fly",
+  "description": "Webcomponent nasty-fly following open-wc recommendations",
   "license": "MIT",
-  "main": "dist/index.js",
-  "module": "dist/index.js",
+  "author": "nasty-fly",
+  "version": "0.0.0",
+  "main": "dist/src/index.js",
+  "module": "dist/src/index.js",
+  "exports": {
+    ".": "./dist/src/index.js",
+    "./nasty-fly.js": "./dist/src/nasty-fly.js",
+    "./nasty-fly-game.js": "./dist/src/nasty-fly-game.js"
+  },
   "scripts": {
     "start": "npm run build && concurrently -k -r \"tsc --watch --preserveWatchOutput\" \"wds\"",
-    "build": "tsc",
+    "build": "tsc && cp -r assets ./dist/",
     "prepublish": "npm run build",
     "lint": "eslint --ext .ts,.html . --ignore-path .gitignore && prettier \"**/*.ts\" --check --ignore-path .gitignore",
     "format": "eslint --ext .ts,.html . --fix --ignore-path .gitignore && prettier \"**/*.ts\" --write --ignore-path .gitignore",
@@ -18,32 +23,30 @@
     "storybook:build": "npm run build && build-storybook"
   },
   "dependencies": {
-    "lit-element": "^2.4.0",
-    "lit-html": "^1.3.0"
+    "lit": "^2.0.0-rc.2"
   },
   "devDependencies": {
-    "@open-wc/eslint-config": "^4.2.0",
-    "@open-wc/testing": "^2.5.32",
-    "@typescript-eslint/eslint-plugin": "^4.16.1",
-    "@typescript-eslint/parser": "^4.16.1",
-    "@web/dev-server": "^0.1.8",
-    "@web/dev-server-storybook": "^0.3.5",
-    "@web/test-runner": "^0.12.15",
-    "@web/test-runner-playwright": "^0.8.4",
+    "@open-wc/eslint-config": "^4.3.0",
+    "@open-wc/testing": "next",
+    "@typescript-eslint/eslint-plugin": "^4.29.2",
+    "@typescript-eslint/parser": "^4.29.2",
+    "@web/dev-server": "^0.1.21",
+    "@web/dev-server-storybook": "next",
+    "@web/test-runner": "next",
     "concurrently": "^5.3.0",
-    "eslint": "^7.21.0",
-    "eslint-config-prettier": "^7.2.0",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
     "husky": "^4.3.8",
     "lint-staged": "^10.5.4",
-    "prettier": "^2.2.1",
-    "tslib": "^2.1.0",
-    "typescript": "^4.2.2"
+    "prettier": "^2.3.2",
+    "tslib": "^2.3.1",
+    "typescript": "^4.3.5"
   },
   "eslintConfig": {
     "parser": "@typescript-eslint/parser",
     "extends": [
-      "@open-wc/eslint-config",
-      "eslint-config-prettier"
+      "@open-wc",
+      "prettier"
     ],
     "plugins": [
       "@typescript-eslint"

@@ -1,39 +1,42 @@
 <!doctype html>
 <html lang="en-GB">
-<head>
-  <meta charset="utf-8">
-  <style>
-    body {
-      background: #fafafa;
-    }
-  </style>
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-</head>
-<body>
-  <div id="demo"></div>
 
-  <script>
+  <head>
+    <meta charset="utf-8">
+    <style>
+      body {
+        background: #fafafa;
+      }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  </head>
 
-  </script>
+  <body>
+    <div id="demo"></div>
 
-  <script type="module">
-    import { html, render } from 'lit-html';
-    import { until } from 'lit-html/directives/until';
-    import { unsafeHTML } from 'lit-html/directives/unsafe-html'
-    import '../nasty-fly-game.js';
+    <script>
 
-    const readme = fetch('../README.md')
-      .then(responce => responce.text())
-      // eslint-disable-next-line no-undef
-      .then(readmetext => html`${unsafeHTML(marked(readmetext))}`);
+    </script>
 
-    render(
-      html`
-        ${until(readme,html`loading readme...`)}
+    <script type="module">
+      import { html, render } from 'lit';
+      import { until } from 'lit/directives/until.js';
+      import { unsafeHTML } from 'lit/directives/unsafe-html.js'
+      import '../dist/src/nasty-fly-game.js';
+
+      const readme = fetch('../README.md')
+        .then(responce => responce.text())
+        // eslint-disable-next-line no-undef
+        .then(readmetext => html`${ unsafeHTML(marked.parse(readmetext)) }`);
+
+      render(
+        html`
+        ${ until(readme, html`loading readme...`) }
         <nasty-fly-game maxcount=10></nasty-fly-game>
       `,
-      document.querySelector('#demo')
-    );
-  </script>
-</body>
+        document.querySelector('#demo')
+      );
+    </script>
+  </body>
+
 </html>

@@ -1,3 +1,3 @@
-import { NastyFly } from './src/NastyFly.js';
+import { NastyFly } from './NastyFly.js';
 
 window.customElements.define('nasty-fly', NastyFly);

@@ -1,7 +1,7 @@
 import { html, fixture, expect, waitUntil } from '@open-wc/testing';
 
 import { NastyFlyGame } from '../src/NastyFlyGame.js';
-import '../nasty-fly-game.js';
+import '../src/nasty-fly-game.js';
 import { NastyFly } from '../src/NastyFly.js';
 
 describe('NastyFlyGame', () => {
@@ -22,14 +22,12 @@ describe('NastyFlyGame', () => {
   });
 
   // eslint-disable-next-line prefer-arrow-callback
-  it('creates more of them when they die', async function () {
-    this.timeout(5000);
+  it('creates more of them when they die', async () => {
     const aFlyGame = await fixture<NastyFlyGame>(
       html`<nasty-fly-game></nasty-fly-game>`
     );
-    const oldcount = aFlyGame.shadowRoot?.querySelectorAll<NastyFly>(
-      'nasty-fly'
-    ).length;
+    const oldcount =
+      aFlyGame.shadowRoot?.querySelectorAll<NastyFly>('nasty-fly').length;
     const theFly = aFlyGame.shadowRoot?.querySelector<NastyFly>('nasty-fly');
     theFly?.вмерти();
     await waitUntil(

@@ -1,11 +1,5 @@
-import {
-  LitElement,
-  html,
-  css,
-  property,
-  internalProperty,
-  TemplateResult,
-} from 'lit-element';
+import { LitElement, html, css, TemplateResult } from 'lit';
+import { property, state } from 'lit/decorators.js';
 
 /**
  * LitElement based component depicting a fly which can sit somewhere
@@ -85,19 +79,17 @@ export class NastyFly extends LitElement {
    * @fires HTMLAudioElement#canplaythrough
    * @fires NastyFly#readytofly when ready to play
    */
-  @internalProperty() private __buzz: HTMLAudioElement = new Audio(
-    '../assets/buzz.mp3'
-  );
+  @state() private __buzz: HTMLAudioElement = new Audio('../assets/buzz.mp3');
 
-  @internalProperty() private __x: number = 0;
+  @state() private __x: number = 0;
 
-  @internalProperty() private __y: number = 0;
+  @state() private __y: number = 0;
 
-  @internalProperty() private __кут: number = Math.random() * (Math.PI * 2);
+  @state() private __кут: number = Math.random() * (Math.PI * 2);
 
-  @internalProperty() private __затримкаЗльоту: number | undefined;
+  @state() private __затримкаЗльоту: number | undefined;
 
-  @internalProperty() private __CANBUZZ: Boolean = false;
+  @state() private __CANBUZZ: Boolean = false;
 
   static get styles() {
     return css`

@@ -1,7 +1,7 @@
 import { html, fixture, expect } from '@open-wc/testing';
 
 import { NastyFly } from '../src/NastyFly.js';
-import '../nasty-fly.js';
+import '../src/nasty-fly.js';
 
 describe('NastyFly element', () => {
   it('exists', async () => {
@@ -16,9 +16,8 @@ describe('NastyFly element', () => {
     const aFly: NastyFly = await fixture<NastyFly>(
       html`<nasty-fly></nasty-fly>`
     );
-    const theFly: HTMLDivElement | null = aFly.shadowRoot!.querySelector<HTMLDivElement>(
-      'div.муха'
-    );
+    const theFly: HTMLDivElement | null =
+      aFly.shadowRoot!.querySelector<HTMLDivElement>('div.муха');
     expect(theFly).to.be.instanceOf(HTMLDivElement);
   });
 
@@ -33,9 +32,8 @@ describe('NastyFly element', () => {
     const aFly: NastyFly = await fixture<NastyFly>(
       html`<nasty-fly></nasty-fly>`
     );
-    const theFly: HTMLDivElement | null = aFly.shadowRoot!.querySelector<HTMLDivElement>(
-      'div.муха'
-    );
+    const theFly: HTMLDivElement | null =
+      aFly.shadowRoot!.querySelector<HTMLDivElement>('div.муха');
     await aFly.updateComplete;
     expect(window.getComputedStyle(theFly!).backgroundImage).to.include(
       'fly.svg'
@@ -46,9 +44,8 @@ describe('NastyFly element', () => {
     const aFly: NastyFly = await fixture<NastyFly>(
       html`<nasty-fly></nasty-fly>`
     );
-    const theFly: HTMLDivElement | null = aFly.shadowRoot!.querySelector<HTMLDivElement>(
-      'div.муха'
-    );
+    const theFly: HTMLDivElement | null =
+      aFly.shadowRoot!.querySelector<HTMLDivElement>('div.муха');
     expect(window.getComputedStyle(theFly!).backgroundColor).not.equal('pink');
   });
 
@@ -64,9 +61,8 @@ describe('NastyFly element', () => {
     const aFly: NastyFly = await fixture<NastyFly>(
       html`<nasty-fly liveliness="0"></nasty-fly>`
     );
-    const theFly: HTMLDivElement | null = aFly.shadowRoot!.querySelector<HTMLDivElement>(
-      'div.муха'
-    );
+    const theFly: HTMLDivElement | null =
+      aFly.shadowRoot!.querySelector<HTMLDivElement>('div.муха');
     aFly.click();
     await new Promise<void>(resolve => {
       aFly.addEventListener('літає', () => {

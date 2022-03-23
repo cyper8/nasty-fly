@@ -1,5 +1,5 @@
-import { html, TemplateResult } from 'lit-html';
-import '../nasty-fly-game.js';
+import { html, TemplateResult } from 'lit';
+import '../src/nasty-fly-game.js';
 
 export default {
   title: 'NastyFlyGame',

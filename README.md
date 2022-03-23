@@ -1,4 +1,4 @@
-# \<nasty-fly-game>
+# \<nasty-fly>
 
 This webcomponent follows the [open-wc](https://github.com/open-wc/open-wc) recommendation.
 
@@ -12,55 +12,35 @@ npm i nasty-fly
 
 ```html
 <script type="module">
-  import 'nasty-fly/nasty-fly-game.js';
+  import 'nasty-fly/nasty-fly.js';
 </script>
 
-<nasty-fly-game></nasty-fly-game>
+<nasty-fly></nasty-fly>
 ```
 
-## Linting with ESLint, Prettier, and Types
+## Linting and formatting
 
-To scan the project for linting errors, run
+To scan the project for linting and formatting errors, run
 
 ```bash
 npm run lint
 ```
 
-You can lint with ESLint and Prettier individually as well
-
-```bash
-npm run lint:eslint
-```
-
-```bash
-npm run lint:prettier
-```
-
-To automatically fix many linting errors, run
+To automatically fix linting and formatting errors, run
 
 ```bash
 npm run format
 ```
 
-You can format using ESLint and Prettier individually as well
-
-```bash
-npm run format:eslint
-```
-
-```bash
-npm run format:prettier
-```
-
 ## Testing with Web Test Runner
 
-To run the suite of Web Test Runner tests, run
+To execute a single test run:
 
 ```bash
 npm run test
 ```
 
-To run the tests in watch mode (for &lt;abbr title=&#34;test driven development&#34;&gt;TDD&lt;/abbr&gt;, for example), run
+To run the tests in interactive watch mode run:
 
 ```bash
 npm run test:watch
@@ -79,6 +59,7 @@ To build a production version of Storybook, run
 ```bash
 npm run storybook:build
 ```
+
 
 ## Tooling configs
 

@@ -1,6 +1,7 @@
-import { html, css, LitElement, property, TemplateResult } from 'lit-element';
-import { asyncAppend } from 'lit-html/directives/async-append';
-import '../nasty-fly.js';
+import { html, css, LitElement, TemplateResult } from 'lit';
+import { property } from 'lit/decorators.js';
+import { asyncAppend } from 'lit/directives/async-append.js';
+import './nasty-fly.js';
 
 /**
  * Custom Element based on LitElement that creates flies on the page,
