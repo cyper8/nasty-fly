@@ -9,9 +9,11 @@
       }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="../dist/src/nasty-fly-game.js" type="module"></script>
   </head>
 
   <body>
+
     <div id="demo"></div>
 
     <script>
@@ -22,7 +24,6 @@
       import { html, render } from 'https://unpkg.com/lit-html?module';
       import { until } from 'https://unpkg.com/lit-html/directives/until.js?module';
       import { unsafeHTML } from 'https://unpkg.com/lit-html/directives/unsafe-html.js?module'
-      import '../dist/src/nasty-fly-game.js';
 
       const readme = fetch('../README.md')
         .then(responce => responce.text())
