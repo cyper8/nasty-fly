@@ -18,5 +18,4 @@
 # build
 /_site/
 /out-tsc/
-/.storybook/
 /storybook-static/

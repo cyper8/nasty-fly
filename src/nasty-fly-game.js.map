@@ -1,0 +1,1 @@
+{"version":3,"file":"nasty-fly-game.js","sourceRoot":"","sources":["nasty-fly-game.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,YAAY,EAAE,MAAM,mBAAmB,CAAC;AAEjD,MAAM,CAAC,cAAc,CAAC,MAAM,CAAC,gBAAgB,EAAE,YAAY,CAAC,CAAC","sourcesContent":["import { NastyFlyGame } from './NastyFlyGame.js';\n\nwindow.customElements.define('nasty-fly-game', NastyFlyGame);\n"]}

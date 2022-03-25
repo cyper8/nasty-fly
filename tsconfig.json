@@ -10,10 +10,8 @@
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
     "importHelpers": true,
-    "outDir": "dist",
     "sourceMap": true,
     "inlineSources": true,
-    "rootDir": "./",
     "declaration": true,
     "incremental": true
   },

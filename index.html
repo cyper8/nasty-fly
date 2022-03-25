@@ -13,25 +13,28 @@
       import { html, render } from 'https://unpkg.com/lit-html?module';
       import { unsafeHTML } from 'https://unpkg.com/lit-html/directives/unsafe-html.js?module'
 
-      import './dist/src/nasty-fly-game.js';
+      import './src/nasty-fly-game.js';
 
 
       window.onload = () => {
       fetch('README.md')
         .then(responce => responce.text())
-
         .then(readmetext => {
-          // eslint-disable-next-line no-undef
-          render(html`${ unsafeHTML(marked.parse(readmetext)) }<nasty-fly-game maxcount=10></nasty-fly-game>`, document.querySelector('#demo'));
+          render(
+            html`${
+              // eslint-disable-next-line no-undef
+              unsafeHTML(marked.parse(readmetext))
+            }
+            <nasty-fly-game maxcount=10></nasty-fly-game>`,
+            document.querySelector('#demo')
+          );
         });
       }
     </script>
   </head>
 
   <body>
-
     <div id="demo"></div>
-
   </body>
 
 </html>
