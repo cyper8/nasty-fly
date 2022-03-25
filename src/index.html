@@ -13,11 +13,11 @@
       import { html, render } from 'https://unpkg.com/lit-html?module';
       import { unsafeHTML } from 'https://unpkg.com/lit-html/directives/unsafe-html.js?module'
 
-      import './src/nasty-fly-game.js';
+      import './nasty-fly-game.js';
 
 
       window.onload = () => {
-      fetch('README.md')
+      fetch('../README.md')
         .then(responce => responce.text())
         .then(readmetext => {
           render(

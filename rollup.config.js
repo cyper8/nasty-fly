@@ -6,10 +6,10 @@ import { terser } from 'rollup-plugin-terser';
 import { copy } from '@web/rollup-plugin-copy';
 
 export default {
-  input: 'index.html',
+  input: 'src/index.html',
   output: {
-    entryFileNames: '[hash].js',
-    chunkFileNames: '[hash].js',
+    entryFileNames: 'src/[hash].js',
+    chunkFileNames: 'src/[hash].js',
     assetFileNames: '[hash][extname]',
     format: 'es',
     dir: 'docs',
@@ -25,7 +25,7 @@ export default {
     terser(),
     /** Bundle assets references via import.meta.url */
     importMetaAssets(),
-    copy({patterns: ['assets', 'README.md']}),
+    copy({patterns: ['src/*.{svg,mp3}', 'README.md']}),
     // /** Compile JS to a lower language target */
     // babel({
     //   babelHelpers: 'bundled',

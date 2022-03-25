@@ -15,7 +15,7 @@
     "start": "npm run build && concurrently -k -r \"tsc --watch --preserveWatchOutput\" \"wds\"",
     "build": "tsc",
     "build:docs": "npm run build && rimraf docs && rollup -c rollup.config.js",
-    "prepublish": "npm run build",
+    "prepublish": "npm run build:docs",
     "lint": "eslint --ext .ts,.html . --ignore-path .gitignore && prettier \"**/*.ts\" --check --ignore-path .gitignore",
     "format": "eslint --ext .ts,.html . --fix --ignore-path .gitignore && prettier \"**/*.ts\" --write --ignore-path .gitignore",
     "test": "npm run build && wtr --coverage",

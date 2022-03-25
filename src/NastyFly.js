@@ -38,7 +38,7 @@ export class NastyFly extends LitElement {
          * @fires HTMLAudioElement#canplaythrough
          * @fires NastyFly#readytofly when ready to play
          */
-        this.__buzz = new Audio('../assets/buzz.mp3');
+        this.__buzz = new Audio('./buzz.mp3');
         this.__x = 0;
         this.__y = 0;
         this.__кут = Math.random() * (Math.PI * 2);
@@ -112,16 +112,16 @@ export class NastyFly extends LitElement {
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
-        background-image: url('../assets/fly.svg');
+        background-image: url('./fly.svg');
         transform-origin: 0px 0px;
       }
 
       .муха[is='літає'] {
-        background-image: url('../assets/fly-flies.svg');
+        background-image: url('./fly-flies.svg');
       }
 
       .муха[is='прибита'] {
-        background-image: url('../assets/fly-flies.svg');
+        background-image: url('./fly-flies.svg');
         background-color: pink;
       }
     `;
