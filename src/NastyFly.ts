@@ -1,5 +1,9 @@
-import { LitElement, html, css, TemplateResult } from 'lit';
+import { LitElement, html, css, TemplateResult, unsafeCSS } from 'lit';
 import { property, state } from 'lit/decorators.js';
+
+const fly = new URL('../assets/fly.svg', import.meta.url).href;
+const flies = new URL('../assets/fly-flies.svg', import.meta.url).href;
+const buzz = new URL('../assets/buzz.mp3', import.meta.url).href;
 
 /**
  * LitElement based component depicting a fly which can sit somewhere
@@ -79,7 +83,7 @@ export class NastyFly extends LitElement {
    * @fires HTMLAudioElement#canplaythrough
    * @fires NastyFly#readytofly when ready to play
    */
-  @state() private __buzz: HTMLAudioElement = new Audio('./buzz.mp3');
+  @state() private __buzz: HTMLAudioElement = new Audio(buzz);
 
   @state() private __x: number = 0;
 
@@ -105,16 +109,16 @@ export class NastyFly extends LitElement {
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
-        background-image: url('./fly.svg');
+        background-image: url(${unsafeCSS(fly)});
         transform-origin: 0px 0px;
       }
 
       .муха[is='літає'] {
-        background-image: url('./fly-flies.svg');
+        background-image: url(${unsafeCSS(flies)});
       }
 
       .муха[is='прибита'] {
-        background-image: url('./fly-flies.svg');
+        background-image: url(${unsafeCSS(flies)});
         background-color: pink;
       }
     `;

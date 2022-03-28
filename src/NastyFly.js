@@ -1,6 +1,9 @@
 import { __decorate } from "tslib";
-import { LitElement, html, css } from 'lit';
+import { LitElement, html, css, unsafeCSS } from 'lit';
 import { property, state } from 'lit/decorators.js';
+const fly = new URL('../assets/fly.svg', import.meta.url).href;
+const flies = new URL('../assets/fly-flies.svg', import.meta.url).href;
+const buzz = new URL('../assets/buzz.mp3', import.meta.url).href;
 /**
  * LitElement based component depicting a fly which can sit somewhere
  * on the page, fly over the page buzzing, and be smashed
@@ -38,7 +41,7 @@ export class NastyFly extends LitElement {
          * @fires HTMLAudioElement#canplaythrough
          * @fires NastyFly#readytofly when ready to play
          */
-        this.__buzz = new Audio('./buzz.mp3');
+        this.__buzz = new Audio(buzz);
         this.__x = 0;
         this.__y = 0;
         this.__кут = Math.random() * (Math.PI * 2);
@@ -112,16 +115,16 @@ export class NastyFly extends LitElement {
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
-        background-image: url('./fly.svg');
+        background-image: url(${unsafeCSS(fly)});
         transform-origin: 0px 0px;
       }
 
       .муха[is='літає'] {
-        background-image: url('./fly-flies.svg');
+        background-image: url(${unsafeCSS(flies)});
       }
 
       .муха[is='прибита'] {
-        background-image: url('./fly-flies.svg');
+        background-image: url(${unsafeCSS(flies)});
         background-color: pink;
       }
     `;

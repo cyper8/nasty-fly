@@ -3,13 +3,12 @@ import nodeResolve from '@rollup/plugin-node-resolve';
 import html from '@web/rollup-plugin-html';
 import { importMetaAssets } from '@web/rollup-plugin-import-meta-assets';
 import { terser } from 'rollup-plugin-terser';
-import { copy } from '@web/rollup-plugin-copy';
 
 export default {
-  input: 'src/index.html',
+  input: 'index.html',
   output: {
-    entryFileNames: 'src/[hash].js',
-    chunkFileNames: 'src/[hash].js',
+    entryFileNames: '[hash].js',
+    chunkFileNames: '[hash].js',
     assetFileNames: '[hash][extname]',
     format: 'es',
     dir: 'docs',
@@ -25,8 +24,7 @@ export default {
     terser(),
     /** Bundle assets references via import.meta.url */
     importMetaAssets(),
-    copy({patterns: ['src/*.{svg,mp3}', 'README.md']}),
-    // /** Compile JS to a lower language target */
+    /** Compile JS to a lower language target */
     // babel({
     //   babelHelpers: 'bundled',
     //   presets: [
