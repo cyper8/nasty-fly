@@ -3,8 +3,8 @@ import babel from '@rollup/plugin-babel';
 import html from '@web/rollup-plugin-html';
 import { importMetaAssets } from '@web/rollup-plugin-import-meta-assets';
 import { terser } from 'rollup-plugin-terser';
-import { generateSW } from 'rollup-plugin-workbox';
-import path from 'path';
+// import { generateSW } from 'rollup-plugin-workbox';
+// import path from 'path';
 
 const outputDir = 'docs';
 
@@ -23,8 +23,8 @@ export default {
     /** Enable using HTML as rollup entrypoint */
     html({
       minify: true,
-      injectServiceWorker: true,
-      serviceWorkerPath: path.join(outputDir, 'sw.js'),
+      // injectServiceWorker: true,
+      // serviceWorkerPath: path.join(outputDir, 'sw.js'),
     }),
     /** Resolve bare module imports */
     nodeResolve(),
@@ -74,29 +74,29 @@ export default {
       ],
     }),
     /** Create and inject a service worker */
-    generateSW({
-      globIgnores: ['polyfills/*.js', 'nomodule-*.js'],
-      navigateFallback: '/index.html',
-      // where to output the generated sw
-      swDest: path.join(outputDir, 'sw.js'),
-      // directory to match patterns against to be precached
-      globDirectory: path.join(outputDir),
-      // cache any html js and css by default
-      globPatterns: ['**/*.{html,js,css,webmanifest}'],
-      skipWaiting: true,
-      clientsClaim: true,
-      runtimeCaching: [
-        { urlPattern: 'polyfills/*.js', handler: 'CacheFirst' },
-        {
-          urlPattern: ({ request }) => request.destination === 'image',
-          handler: 'StaleWhileRevalidate',
-          options: {
-            cacheName: 'images-cache',
-            expiration: {
-              maxEntries: 10,
-            },
-          }
-        }],
-    }),
+    // generateSW({
+    //   globIgnores: ['polyfills/*.js', 'nomodule-*.js'],
+    //   navigateFallback: '/index.html',
+    //   // where to output the generated sw
+    //   swDest: path.join(outputDir, 'sw.js'),
+    //   // directory to match patterns against to be precached
+    //   globDirectory: path.join(outputDir),
+    //   // cache any html js and css by default
+    //   globPatterns: ['**/*.{html,js,css,webmanifest}'],
+    //   skipWaiting: true,
+    //   clientsClaim: true,
+    //   runtimeCaching: [
+    //     { urlPattern: 'polyfills/*.js', handler: 'CacheFirst' },
+    //     {
+    //       urlPattern: ({ request }) => request.destination === 'image',
+    //       handler: 'StaleWhileRevalidate',
+    //       options: {
+    //         cacheName: 'images-cache',
+    //         expiration: {
+    //           maxEntries: 10,
+    //         },
+    //       }
+    //     }],
+    // }),
   ],
 };
