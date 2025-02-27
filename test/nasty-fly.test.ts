@@ -1,20 +1,26 @@
-import { html, fixture, expect } from '@open-wc/testing';
-
+import { ssrFixture } from '@lit-labs/testing/fixtures.js';
+import { html } from 'lit';
+import { expect, describe, it } from 'vitest';
 import { NastyFly } from '../src/NastyFly.js';
-import '../src/nasty-fly.js';
 
 describe('NastyFly element', () => {
   it('exists', async () => {
-    const NastyFlyElementInstance = await fixture<NastyFly>(
-      html`<nasty-fly></nasty-fly>`
+    const NastyFlyElementInstance = await ssrFixture<NastyFly>(
+      html`<nasty-fly></nasty-fly>`,
+      {
+        modules: ['../src/nasty-fly.js']
+      }
     );
     expect(NastyFlyElementInstance).to.exist;
     // expect(NastyFlyElementInstance).to.be.accessible();
   });
 
   it('has fly', async () => {
-    const aFly: NastyFly = await fixture<NastyFly>(
-      html`<nasty-fly></nasty-fly>`
+    const aFly: NastyFly = await ssrFixture<NastyFly>(
+      html`<nasty-fly></nasty-fly>`,
+      {
+        modules: ['../src/nasty-fly.js']
+      }
     );
     const theFly: HTMLDivElement | null =
       aFly.shadowRoot!.querySelector<HTMLDivElement>('div.муха');
@@ -22,15 +28,21 @@ describe('NastyFly element', () => {
   });
 
   it('sits', async () => {
-    const aFly: NastyFly = await fixture<NastyFly>(
-      html`<nasty-fly></nasty-fly>`
+    const aFly: NastyFly = await ssrFixture<NastyFly>(
+      html`<nasty-fly></nasty-fly>`,
+      {
+        modules: ['../src/nasty-fly.js']
+      }
     );
     expect(aFly.стан).equals('сидить');
   });
 
   it('looks like a fly', async () => {
-    const aFly: NastyFly = await fixture<NastyFly>(
-      html`<nasty-fly></nasty-fly>`
+    const aFly: NastyFly = await ssrFixture<NastyFly>(
+      html`<nasty-fly></nasty-fly>`,
+      {
+        modules: ['../src/nasty-fly.js']
+      }
     );
     const theFly: HTMLDivElement | null =
       aFly.shadowRoot!.querySelector<HTMLDivElement>('div.муха');
@@ -41,25 +53,36 @@ describe('NastyFly element', () => {
   });
 
   it('is properly styled', async () => {
-    const aFly: NastyFly = await fixture<NastyFly>(
-      html`<nasty-fly></nasty-fly>`
+    const aFly: NastyFly = await ssrFixture<NastyFly>(
+      html`<nasty-fly></nasty-fly>`,
+      {
+        modules: ['../src/nasty-fly.js']
+      }
     );
     const theFly: HTMLDivElement | null =
       aFly.shadowRoot!.querySelector<HTMLDivElement>('div.муха');
     expect(window.getComputedStyle(theFly!).backgroundColor).not.equal('pink');
   });
 
-  it('can fly', done => {
-    fixture<NastyFly>(
-      html`<nasty-fly liveliness="0" @літає=${() => done()}></nasty-fly>`
+  it('can fly', async () => {
+    let success: boolean = false;
+    await ssrFixture<NastyFly>(
+      html`<nasty-fly liveliness="0" @літає=${() => {success = true}}></nasty-fly>`,
+      {
+        modules: ['../src/nasty-fly.js']
+      }
     ).then(aFly => {
       aFly.click();
     });
+    expect(success).toBeTruthy();
   });
 
   it('looks like a flying fly, while flying', async () => {
-    const aFly: NastyFly = await fixture<NastyFly>(
-      html`<nasty-fly liveliness="0"></nasty-fly>`
+    const aFly: NastyFly = await ssrFixture<NastyFly>(
+      html`<nasty-fly liveliness="0"></nasty-fly>`,
+      {
+        modules: ['../src/nasty-fly.js']
+      }
     );
     const theFly: HTMLDivElement | null =
       aFly.shadowRoot!.querySelector<HTMLDivElement>('div.муха');
@@ -92,32 +115,42 @@ describe('NastyFly element', () => {
 
   // TODO: test liveliness changes effects
 
-  it('can be smashed', done => {
-    fixture<NastyFly>(html`<nasty-fly liveliness="0"></nasty-fly>`).then(
+  it('can be smashed', async () => {
+    let success: boolean = false;
+    await ssrFixture<NastyFly>(html`<nasty-fly liveliness="0"></nasty-fly>`,
+    {
+      modules: ['../src/nasty-fly.js']
+    }).then(
       aFly => {
         aFly.addEventListener('літає', () => {
           aFly.click();
         });
         aFly.addEventListener('смерть', () => {
-          done();
+          success = true;
         });
         aFly.addEventListener('readytofly', () => {
           aFly.click();
         });
       }
     );
+    expect(success).toBeTruthy();
   });
 
-  it('flies until eventually sits herself down', done => {
-    fixture<NastyFly>(html`<nasty-fly liveliness="0"></nasty-fly>`).then(
+  it('flies until eventually sits herself down', async () => {
+    let success: boolean = false;
+    await ssrFixture<NastyFly>(html`<nasty-fly liveliness="0"></nasty-fly>`,
+    {
+      modules: ['../src/nasty-fly.js']
+    }).then(
       aFly => {
         aFly.addEventListener('readytofly', () => aFly.click());
         aFly.addEventListener('літає', () => {
           aFly.addEventListener('сидить', () => {
-            done();
+            success = true;
           });
         });
       }
     );
+    expect(success).toBeTruthy();
   });
 });

@@ -1,9 +1,9 @@
 import { LitElement, html, css, TemplateResult, unsafeCSS } from 'lit';
-import { property, state } from 'lit/decorators.js';
+import { customElement, property, state } from 'lit/decorators.js';
 
-const fly = new URL('../assets/fly.svg', import.meta.url).href;
-const flies = new URL('../assets/fly-flies.svg', import.meta.url).href;
-const buzz = new URL('../assets/buzz.mp3', import.meta.url).href;
+const fly = new URL('./assets/fly.svg', import.meta.url).href;
+const flies = new URL('./assets/fly-flies.svg', import.meta.url).href;
+const buzz = new URL('./assets/buzz.mp3', import.meta.url).href;
 
 /**
  * LitElement based component depicting a fly which can sit somewhere
@@ -17,6 +17,7 @@ const buzz = new URL('../assets/buzz.mp3', import.meta.url).href;
  * @class NastyFly
  * @extends {LitElement}
  */
+@customElement('nasty-fly')
 export class NastyFly extends LitElement {
   /**
    * Basic component of the fly's speed
@@ -44,7 +45,8 @@ export class NastyFly extends LitElement {
    * @type {('сидить' | 'літає' | 'прибита')}
    * @memberof NastyFly
    */
-  @property({ type: String }) стан: 'сидить' | 'літає' | 'прибита' = 'сидить';
+  @property ({ type: String }) 
+  accessor стан: 'сидить' | 'літає' | 'прибита' = 'сидить';
 
   /**
    * Liveliness of a fly - a period it can constantly be flying
@@ -83,17 +85,17 @@ export class NastyFly extends LitElement {
    * @fires HTMLAudioElement#canplaythrough
    * @fires NastyFly#readytofly when ready to play
    */
-  @state() private __buzz: HTMLAudioElement = new Audio(buzz);
+  @state()  private accessor __buzz: HTMLAudioElement = new Audio(buzz);
 
-  @state() private __x: number = 0;
+  @state() private accessor __x: number = 0;
 
-  @state() private __y: number = 0;
+  @state() private accessor __y: number = 0;
 
-  @state() private __кут: number = Math.random() * (Math.PI * 2);
+  @state() private accessor __кут: number = Math.random() * (Math.PI * 2);
 
-  @state() private __затримкаЗльоту: number | undefined;
+  @state() private accessor __затримкаЗльоту: number | undefined;
 
-  @state() private __CANBUZZ: Boolean = false;
+  @state() private accessor __CANBUZZ: Boolean = false;
 
   static get styles() {
     return css`
