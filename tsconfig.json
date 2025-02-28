@@ -1,19 +1,24 @@
 {
   "compilerOptions": {
-    "target": "es2018",
-    "module": "esnext",
-    "moduleResolution": "node",
-    "noEmitOnError": true,
-    "lib": ["es2017", "dom"],
-    "strict": true,
-    "esModuleInterop": false,
-    "allowSyntheticDefaultImports": true,
+    "target": "ES2020",
+    "module": "ESNext",
     "experimentalDecorators": true,
-    "importHelpers": true,
-    "sourceMap": true,
-    "inlineSources": true,
-    "declaration": true,
-    "incremental": true
+    "emitDecoratorMetadata": true,
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "skipLibCheck": true,
+
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "isolatedModules": true,
+    "moduleDetection": "force",
+    "noEmit": true,
+
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
   },
-  "include": ["**/*.ts"]
+  "include": ["src", "test", "vite.config.ts"]
 }

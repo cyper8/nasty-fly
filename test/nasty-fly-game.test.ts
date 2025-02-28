@@ -1,41 +1,46 @@
-import { html, fixture, expect, waitUntil } from '@open-wc/testing';
-
 import { NastyFlyGame } from '../src/NastyFlyGame.js';
-import '../src/nasty-fly-game.js';
-import { NastyFly } from '../src/NastyFly.js';
+import { html, render } from 'lit';
+import { expect, describe, it, beforeAll, afterAll } from 'vitest';
 
-describe('NastyFlyGame', () => {
+const makeAFlyGame = async () => {
+  return import('../src/NastyFlyGame.js').then(() => {
+    let root = document.body;
+    render(html`<nasty-fly-game></nasty-fly-game>`, root, );
+    let game = root.querySelector('nasty-fly-game');
+    if (!game) {throw new Error('failed to render NastyFlyGame')} else 
+    {
+      return game
+    }
+  })
+}
+
+describe('NastyFlyGame', async () => {
+  var aFlyGame: NastyFlyGame;
+  beforeAll(async () => {
+    aFlyGame = await makeAFlyGame();
+  });
+  afterAll(() => {
+    aFlyGame.remove();
+  })
   it('exists', async () => {
-    const aFlyGame = await fixture<NastyFlyGame>(
-      html`<nasty-fly-game></nasty-fly-game>`
-    );
     expect(aFlyGame).to.exist;
+    expect(aFlyGame).instanceOf(NastyFlyGame);
   });
 
   it('creates a fly', async () => {
-    const aFlyGame = await fixture<NastyFlyGame>(
-      html`<nasty-fly-game></nasty-fly-game>`
-    );
     expect(
-      aFlyGame.shadowRoot?.querySelectorAll<NastyFly>('nasty-fly').length
+      aFlyGame.shadowRoot?.querySelectorAll('nasty-fly').length
     ).to.be.above(0);
   });
 
-  // eslint-disable-next-line prefer-arrow-callback
   it('creates more of them when they die', async () => {
-    const aFlyGame = await fixture<NastyFlyGame>(
-      html`<nasty-fly-game></nasty-fly-game>`
-    );
     const oldcount =
-      aFlyGame.shadowRoot?.querySelectorAll<NastyFly>('nasty-fly').length;
-    const theFly = aFlyGame.shadowRoot?.querySelector<NastyFly>('nasty-fly');
-    theFly?.вмерти();
-    await waitUntil(
-      () =>
-        aFlyGame.shadowRoot?.querySelectorAll<NastyFly>('nasty-fly').length! >
-        oldcount!,
-      'should be reborn',
-      { timeout: 5000 }
-    );
+      aFlyGame.shadowRoot?.querySelectorAll('nasty-fly').length;
+    const theFly = aFlyGame.shadowRoot?.querySelector('nasty-fly');
+    if (theFly?.стан!=='прибита') theFly!.вмерти();
+    await expect.poll(() => theFly!.стан).to.equal('прибита');
+    await expect.poll(() => aFlyGame.counter, {timeout: 5000}).toBeGreaterThan(0);
+    await expect.poll(() => aFlyGame.shadowRoot?.querySelectorAll('nasty-fly').length)
+    .toBeGreaterThan(oldcount!);
   });
 });

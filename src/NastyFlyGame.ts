@@ -1,7 +1,8 @@
 import { html, css, LitElement, TemplateResult } from 'lit';
-import { property } from 'lit/decorators.js';
+import { customElement, property } from 'lit/decorators.js';
 import { asyncAppend } from 'lit/directives/async-append.js';
-import './nasty-fly.js';
+import { NastyFly } from './NastyFly.js';
+import './NastyFly.js';
 
 /**
  * Custom Element based on LitElement that creates flies on the page,
@@ -12,6 +13,7 @@ import './nasty-fly.js';
  * @class NastyFlyGame
  * @extends {LitElement}
  */
+@customElement('nasty-fly-game')
 export class NastyFlyGame extends LitElement {
   static styles = css`
     .fly-counter {
@@ -27,7 +29,7 @@ export class NastyFlyGame extends LitElement {
    * @type {number}
    * @memberof NastyFlyGame
    */
-  @property({ type: Number }) counter: number = 0;
+  @property({ type: Number }) accessor counter: number = 0;
 
   /**
    * Create new flies until this count.
@@ -35,7 +37,7 @@ export class NastyFlyGame extends LitElement {
    * @type {number}
    * @memberof NastyFlyGame
    */
-  @property({ type: Number }) maxcount: number = 50;
+  @property({ type: Number }) accessor maxcount: number = 50;
 
   /**
    * Async generator to create new fly when previous violently dies.
@@ -71,5 +73,12 @@ export class NastyFlyGame extends LitElement {
       </div>
       ${asyncAppend(this.мухи) /* this.мухи */}
     `;
+  }
+}
+
+declare global {
+  interface HTMLElementTagNameMap {
+    'nasty-fly': NastyFly,
+    'nasty-fly-game': NastyFlyGame
   }
 }
