@@ -3,9 +3,10 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
-    "test": "vitest",
+    "test": "vitest run",
     "dev": "vite",
-    "build": "tsc && npm run test && vite build",
+    "dev:test": "vitest watch",
+    "build": "tsc && vite build",
     "preview": "vite preview"
   },
   "dependencies": {

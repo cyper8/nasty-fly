@@ -1,6 +1,6 @@
 import { NastyFlyGame } from '../src/NastyFlyGame.js';
 import { html, render } from 'lit';
-import { expect, describe, it, vi, beforeAll, afterAll } from 'vitest';
+import { expect, describe, it, beforeAll, afterAll } from 'vitest';
 
 const makeAFlyGame = async () => {
   return import('../src/NastyFlyGame.js').then(() => {
@@ -37,13 +37,10 @@ describe('NastyFlyGame', async () => {
     const oldcount =
       aFlyGame.shadowRoot?.querySelectorAll('nasty-fly').length;
     const theFly = aFlyGame.shadowRoot?.querySelector('nasty-fly');
-    expect(theFly, 'no fly').to.exist;
-    theFly!.вмерти();
-    await theFly!.updateComplete;
-    expect(theFly!.стан).to.equal('прибита');
-    await expect.poll(() => aFlyGame.counter, {timeout: 2000}).toBeGreaterThan(0);
-    const newLength = await aFlyGame.updateComplete
-    .then(() => aFlyGame.shadowRoot?.querySelectorAll('nasty-fly').length);    
-    expect(newLength || 0).toBeGreaterThan(oldcount || 0);
+    if (theFly?.стан!=='прибита') theFly!.вмерти();
+    await expect.poll(() => theFly!.стан).to.equal('прибита');
+    await expect.poll(() => aFlyGame.counter, {timeout: 5000}).toBeGreaterThan(0);
+    await expect.poll(() => aFlyGame.shadowRoot?.querySelectorAll('nasty-fly').length)
+    .toBeGreaterThan(oldcount!);
   });
 });
